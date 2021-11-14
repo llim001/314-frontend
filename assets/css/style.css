@@ -1,0 +1,610 @@
+body {
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+}
+
+#bg {
+	background-image: url("../img/bg.png");
+	height:100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-color: rgba(225,154,221,.4); /* Tint color */
+	background-blend-mode: multiply;
+}
+
+.login-form-box {
+	z-index: 555;
+	height: 100vh;
+	background-color: rgba(255,201,233,.92); /* Tint color */
+	width: 30vw;
+}
+
+.login-title {
+	color: #303030;
+	font-size: 2em;
+	font-weight: 700;
+	margin-top: 300px;
+	padding-bottom: 50%;
+}
+
+.login-input {
+	margin-bottom: 32px;
+	border: none;
+	height: 50px;
+}
+
+/* overwrite bootstrap placeholder colour for the light grey font for login page */
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #949494;
+    font-weight: 200;
+    opacity: 1; /* Firefox */
+}
+
+.login-form {
+	width:100%;
+}
+
+.login-error {
+	color:red;
+	visibility: hidden;
+}
+
+.btn-primary {
+	background-color: #FF007A;
+	border: none;
+	margin-top: 100px;
+	width: 100%;
+	font-weight: 700;
+	height: 50px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-primary:hover {
+	background-color: #CE3A81;
+	border: none;
+}
+.btn-primary:focus {
+	background-color: #DE3A81;
+	border: none;
+}
+
+/* Side bar menu */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial Black" , sans-serif;
+}
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #FFC0CB;
+  padding: 6px 0px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open{
+  width: 250px;
+}
+
+.sidebar .MenuIcon{
+  padding-right: 14px;
+}
+
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name{
+  color: #000000;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+}
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 40px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.nav-list {
+  padding: 0px;
+}
+
+.sidebar .nav-list li {
+	opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.sidebar.open li {
+	display: list-item;
+	opacity: 1;
+    transition: all 0.5s ease;
+    pointer-events: visible;
+}
+.sidebar input{
+  font-size: 15px;
+  color: #FFF;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar li a{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 0px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #e75480;
+}
+.sidebar li a .links_name{
+  color: #000000;
+  font-size: 15px;
+  font-weight: bolder;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile{
+  width: 250px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .role{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .role{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+
+
+.defaultpage{
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .defaultpage{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+.defaultpage .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.defaultpage th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.defaultpage td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.prescription-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .prescription-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.prescription-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.prescription-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.prescription-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.users-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .users-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.users-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.users-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.users-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+
+.patients-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .patients-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.patients-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.patients-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.patients-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+
+
+.doctorAddPrescription-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .doctorAddPrescription-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.doctorAddPrescription-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.doctorAddPrescription-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.doctorAddPrescription-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.dosageLB {
+  padding-right: 14px;
+}
+
+
+.adminAddUser-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .adminAddUser-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.adminAddUser-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.adminAddUser-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.adminAddUser-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+
+.pharmacistViewPrescription-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .pharmacistViewPrescription-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.pharmacistViewPrescription-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.pharmacistViewPrescription-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.pharmacistViewPrescription-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+
+
+.doctorUpdatePrescription-section{
+  display: none;
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  visibility: hidden;
+}
+.sidebar.open ~ .doctorUpdatePrescription-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.doctorUpdatePrescription-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+.doctorUpdatePrescription-section th{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+.doctorUpdatePrescription-section td{
+  padding: 15px;
+  border-width: 5px;
+  border-color: #000000;
+  color: #000000;
+}
+
+#updatePrescriptionForm {
+  display: none;
+  visibility: hidden;
+}
+
+#updateUserForm {
+  display: none;
+  visibility: hidden;
+}
+
+#checkoutBtn {
+  display: none;
+  visibility: hidden;
+}
+
+#checkoutOutputLB {
+  display: none;
+  visibility: hidden;
+}

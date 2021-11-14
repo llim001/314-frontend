@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha256-djO3wMl9GeaC/u6K+ic4Uj/LKhRUSlUFcsruzS7v5ms=" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css?v=1.0">
+    <title>Prescription System</title>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='menu-icon'></i>
+        <div>
+          <i class='close-menu' id="btn">
+              <img src="./assets/img/menuIcon.png" alt="MenuIcon">
+          </i>
+        </div>
+        <div class="logo_name">Prescription (Nameless)</div>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a href="#" class='links' id='patientPrescriptionPage' onclick='changeTab("prescription-section"),getPrescriptions()'>
+          <i class='patientPrescriptionPage'></i>
+          <span class="links_name">View Prescriptions</span>
+        </a>
+      </li>
+      <li>
+       <a href="#" class='links' id='adminViewUserPage' onclick='changeTab("users-section"), getUsers()'>
+         <i class='adminViewUserPage'></i>
+         <span class="links_name">View Users</span>
+       </a>
+     </li>
+     <li>
+       <a href="#" class='links' id='doctorViewPatientPage' onclick='changeTab("patients-section"), getPatientPrescription()'>
+         <i class='doctorViewPatientPage'></i>
+         <span class="links_name">View Patients</span>
+       </a>
+     </li>
+     <li>
+       <a href="#" class='links' id='doctorAddPrescriptionPage' onclick='changeTab("doctorAddPrescription-section")'>
+         <i class='doctorAddPrescriptionPage'></i>
+         <span class="links_name">Add Prescription</span>
+       </a>
+     </li>
+     <li>
+       <a href="#" class='links' id='adminAddUserPage' onclick='changeTab("adminAddUser-section")'>
+         <i class='adminAddUserPage'></i>
+         <span class="links_name">Add User</span>
+       </a>
+     </li>
+     <li>
+       <a href="#" class='links' id='pharmacistViewPrescriptionPage' onclick='changeTab("pharmacistViewPrescription-section")'>
+         <i class='pharmacistViewPrescriptionPage'></i>
+         <span class="links_name">View Prescription</span>
+       </a>
+     </li>
+     <li>
+       <a href="#" class='links' id='doctorUpdatePrescriptionPage' onclick='changeTab("doctorUpdatePrescription-section")'>
+         <i class='doctorUpdatePrescriptionPage'></i>
+         <span class="links_name">Update Prescription</span>
+       </a>
+     </li>
+     <li>
+       <a class="logout-btn" href="#" role="button" onclick="RequestLogout()">
+         <i class='logoutlink'></i>
+         <span class="links_name">Logout</span>
+       </a>
+     </li>
+     <li class="profile">
+         <div class="profile-details">
+           <img src="./assets/img/sam.jpg" alt="profileImg">
+           <div class="name_role">
+             <div class="name">Login As: <span id="username"></span></div>
+             <div class="role">Role: (<span id="role"></span>)</div>
+           </div>
+         </div>
+     </li>
+    </ul>
+  </div>
+  <div class = "defaultpage">
+    <h1>Proof of concept for frontend home page</h1>
+    <br>
+    <h2>Username: <span id="username"></span></h2>
+    <h2>Email: <span id="email"></span></h2>
+    <h2>Role: <span id="role"></span></h2>
+    <h2>Phone Number: <span id="phone"></span></h2>
+    <br>
+    <p>Clear LocalStorage Function Added</p>
+  </div>
+  <!-- Patient View Prescription Page -->
+  <section class="prescription-section">
+    <div class="prescription-detail">
+  		<label for="pname">Search Function (Prescription)</label>
+      <br>
+      <label for="pusername">Token: </label>
+  		<input type="text" id="tokenInput" placeholder="Token_1">
+      <br><br>
+  		<input type="submit" value="Search" onclick="searchPrescriptionsByToken(document.getElementById('tokenInput').value)">
+      <br><br>
+      <table border="1">
+        <thead>
+        <tr>
+          <th>Token</th>
+          <th>Doctor Username</th>
+          <th>Medicine</th>
+          <th>Dosage</th>
+          <th>Date Issued</th>
+          <th>Date Dispensed</th>
+        </tr>
+        </thead>
+        <tbody id="prescriptionDisplay"></tbody>
+      </table>
+    </div>
+  </section>
+  <!-- Admin View User Page -->
+  <section class="users-section">
+    <div class="users-detail">
+      <label for="roleLB">Search Function (Users)</label>
+      <br>
+      <label for="roleLB">Role: </label>
+      <select name="roleInput" id="roleInput">
+        <option value="Admin">Admin</option>
+        <option value="Doctor">Doctor</option>
+        <option value="Patient">Patient</option>
+        <option value="Pharmacist">Pharmacist</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Search" onclick="searchUsersByRole(document.getElementById('roleInput').value)">
+      <br><br>
+
+      <form id="updateUserForm">
+        <label>Update User Form</label><br><br>
+        <label for="currentUsernameLB">Editing Information for: </label>
+        <label for="currentUsername" id="currentUsername"></label><br>
+        <label for="currentPasswordLB">Current Password: </label>
+        <label for="currentPassword" id="currentPassword"></label><br>
+        <label for="currentRoleLB">Current Role: </label>
+        <label for="currentRole" id="currentRole"></label><br>
+        <label for="currentEmailLB">Current Email: </label>
+        <label for="currentEmail" id="currentEmail"></label><br>
+        <label for="currentPhoneLB">Current Phone: </label>
+        <label for="currentPhone" id="currentPhone"></label>
+        <br><br>
+        <label>Enter Updated User Infomation:</label><br>
+        <label for="updatePasswordLB">Password:</label>
+        <input type="text" id="updatePasswordInput">
+        <label for="updateEmailLB">Email:</label>
+        <input type="text" id="updateEmailInput">
+        <label for="updatePhoneLB">Phone:</label>
+        <input type="text" id="updatePhoneInput"><br><br>
+        <input type="button" value="Update" onclick="updateUserBtn()"><br><br>
+      </form>
+
+      <table border="1">
+        <thead>
+        <tr>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody id="usersDisplay"></tbody>
+      </table>
+    </div>
+  </section>
+  <!-- Doctor View Patients Page -->
+  <section class="patients-section">
+    <div class="patients-detail">
+      <label for="patientLB">Search Function (Patients)</label>
+      <br>
+      <label for="patientLB">Patient ID: </label>
+      <input type="text" id="pidInput" placeholder="Patient_1">
+      <br><br>
+      <input type="submit" value="Search" onclick="searchPatientPrescriptionByID(document.getElementById('pidInput').value)">
+      <br><br>
+      <table border="1">
+        <thead>
+        <tr>
+          <th>Patient Username</th>
+          <th>Medicine</th>
+          <th>Dosage</th>
+          <th>Date Issued</th>
+          <th>Token</th>
+        </tr>
+        </thead>
+        <tbody id="patientPrescriptionDisplay"></tbody>
+      </table>
+    </div>
+  </section>
+  <!-- Doctor Add Prescription Page -->
+  <section class="doctorAddPrescription-section">
+    <div class="addPrescription-detail">
+      <label for="patientLB">Prescribing for patient: </label>
+      <input type="text" id="prescribeMDpidInput" placeholder="Patient_1">
+      <br><br>
+      <br><br>
+      <table border="1">
+        <thead>
+        <tr>
+          <th>Medicine</th>
+          <th>Dosage</th>
+          <th>Check</th>
+        </tr>
+        </thead>
+        <tbody id="previewPrescriptionDisplay"></tbody>
+      </table>
+      <br><br>
+      <label for="medicineLB">Medicine: </label>
+      <select name="medicineDDL" id="medicineDDL">
+        <option value="Medicine_1">Medicine_1</option>
+        <option value="Medicine_2">Medicine_2</option>
+        <option value="Medicine_3">Medicine_3</option>
+        <option value="Medicine_4">Medicine_4</option>
+        <option value="Medicine_5">Medicine_5</option>
+        <option value="Medicine_6">Medicine_6</option>
+        <option value="Medicine_7">Medicine_7</option>
+        <option value="Medicine_8">Medicine_8</option>
+        <option value="Medicine_9">Medicine_9</option>
+        <option value="Medicine_10">Medicine_10</option>
+        <option value="Medicine_11">Medicine_11</option>
+        <option value="Medicine_12">Medicine_12</option>
+      </select>
+      <br>
+      <label for="dosageLB" class="dosageLB">Dosage: </label>
+      <select name="dosageDDL" id="dosageDDL">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Insert into table" onclick="insertMedcineAndDosage(document.getElementById('medicineDDL').value, document.getElementById('dosageDDL').value)">
+      <input type="submit" value="Prescribe" onclick="prescribe()">
+      <input type="submit" value="Delete Checked" onclick="deleteChecked()">
+      <br>
+      <label for="outputLB" id="outputLB"></label>
+    </div>
+  </section>
+  <!-- Admin Add User Page -->
+  <section class="adminAddUser-section">
+    <div class="adminAddUser-detail">
+      <label for="addUserLB">Add User Function</label>
+      <br><br>
+      <form>
+        <label for="addUserUN">Username:</label><br>
+        <input type="text" id="addUserUN" name="addUserUN"><br>
+        <label for="addUserPW">Password:</label><br>
+        <input type="text" id="addUserPW" name="addUserPW"><br>
+        <label for="addUserEmail">Email:</label><br>
+        <input type="text" id="addUserEmail" name="addUserEmail"><br>
+        <label for="addUserPhone">Phone:</label><br>
+        <input type="text" id="addUserPhone" name="addUserPhone"><br>
+        <label for="addUserRole">Role:</label><br>
+        <select name="addUserRole" id="addUserRole">
+          <option value="Admin">Admin</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Patient">Patient</option>
+          <option value="Pharmacist">Pharmacist</option>
+        </select>
+        <br><br>
+      </form>
+      <label for="addUserOutputLB" id="addUserOutputLB"></label>
+      <br><br>
+      <input type="submit" value="Add" onclick="addUserCheckTextField()">
+      <br><br>
+    </div>
+  </section>
+  <!-- Pharmacist View Patient Prescription Page -->
+  <section class="pharmacistViewPrescription-section">
+    <div class="pharmacistViewPrescription-detail">
+      <label for="inputTokenLB">Input Token Here:</label>
+      <input type="text" id="pharmacistTokenInput" placeholder="Token_1112021_23859">
+      <br><br>
+      <input type="submit" value="View Prescription" onclick="pharmacistViewPrescription()">
+      <br><br>
+      <table border="1">
+        <thead>
+        <tr>
+          <th>Token</th>
+          <th>Doctor Username</th>
+          <th>Medicine</th>
+          <th>Dosage</th>
+          <th>Date Issued</th>
+          <th>Date Dispense</th>
+        </tr>
+        </thead>
+        <tbody id="pharmacistPrescriptionDisplay"></tbody>
+      </table>
+      <br><br>
+      <input id="checkoutBtn" type="submit" value="Checkout" onclick="updatePrescriptionStatus()">
+      <label for="checkoutOutputLB" id="checkoutOutputLB"></label>
+    </div>
+  </section>
+  <!-- Doctor update patient prescription -->
+  <section class="doctorUpdatePrescription-section">
+    <div class="doctorUpdatePrescription-detail">
+      <label for="inputTokenLB">Input Token Here:</label>
+      <input type="text" id="doctorTokenInput" placeholder="Token_1112021_23859">
+      <br><br>
+      <input type="submit" value="View Prescription" onclick="doctorViewPrescription(document.getElementById('doctorTokenInput').value)">
+      <br><br>
+
+      <form id="updatePrescriptionForm">
+        <label>Update Form</label><br><br>
+        <label for="currentMedicineLB">Current Medicine: </label>
+        <label for="currentMedicineName" id="currentMedicineName"></label><br>
+        <label for="currentDosageLB">Current Dosage: </label>
+        <label for="currentDosageValue" id="currentDosageValue"></label>
+        <br><br>
+        <label>Enter new Medicine and Dosage Below:</label><br>
+        <label for="updateMedicineLB">Medicine:</label>
+        <input type="text" id="updateMedicineInput">
+        <label for="updateDosageLB">Dosage:</label>
+        <input type="number" id="updateDosageInput"><br><br>
+        <input type="button" value="Update" onclick="updatePrescriptionBtn()"><br><br>
+      </form>
+
+      <table border="1">
+        <thead>
+        <tr>
+          <th>Token</th>
+          <th>Patient Username</th>
+          <th>Medicine</th>
+          <th>Dosage</th>
+          <th>Date Issued</th>
+          <th>Status</th>
+          <th>Edit Button</th>
+        </tr>
+        </thead>
+        <tbody id="doctorUpdatePrescriptionDisplay"></tbody>
+      </table>
+      <br><br>
+    </div>
+  </section>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.js" integrity="sha256-FDpsoZwSVa4O6J4/JNdkLmmZPtKV4fyJ/jtwbEmycRs=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./assets/js/config.json"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/logout.js"></script>
+<script src="./assets/js/sidebar.js"></script>
+</body>
+</html>
+
